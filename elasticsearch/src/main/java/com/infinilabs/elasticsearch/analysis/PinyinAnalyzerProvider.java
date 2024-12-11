@@ -6,6 +6,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
+import org.elasticsearch.injection.api.Inject;
 
 
 /**
@@ -15,10 +16,11 @@ public class PinyinAnalyzerProvider extends AbstractIndexAnalyzerProvider<Pinyin
     private final PinyinAnalyzer analyzer;
     private PinyinConfig config;
 
+    @Inject
     public PinyinAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) {
         super(name, settings);
-        this.config=new ESPinyinConfig(settings);
-        this.analyzer = new PinyinAnalyzer(config);
+        config=new ESPinyinConfig(settings);
+        analyzer = new PinyinAnalyzer(config);
     }
 
     @Override
